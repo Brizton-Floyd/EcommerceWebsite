@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <form role="form" class="form-horizontal">
+        <!-- Form Name -->
+        <center>
+            <h2><strong>Add New Order</strong></h2>
+            <br>
+        </center>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="typeOfJob">Type of Job</label>
+            <div class="col-sm-5">
+                <select id="typeOfJob" class="form-control">
+                    <option>Print</option>
+                    <option>Engraving</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="media">Media</label>
+            <div class="col-sm-5">
+                <select id="media" class="form-control">
+                    <option>Clothing</option>
+                    <option>Plague</option>
+                    <option>Trophy</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="mediaCatalogueNumber">Media Catalogue Number</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="mediaCatalogueNumber" placeholder="Media Catalogue Number">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="content">Content</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="content" placeholder="Content in Print/Engraving">
+            </div>
+        </div>
+        <center>
+            <button type="button" class="btn btn-primary btn-lg" onclick="AddOrder();">Submit Order</button>
+        </center>
+        <br>
+    </form>
+</div>

@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Catalog";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7">
+            <h1> Catalog</h1>
+        </div>
+        <div class="col-sm-5" style="margin-top:25px">
+            <div class="col-sm-8">
+                <input type="text" id="newCatalogName"class="form-control" placeholder="Add New Catalogue">
+            </div>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-default" onclick="addCatalog();">Add Catalog</button>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="display: block;" data-pg-collapsed>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered" style="display: table;">
+                <thead style="display: table-header-group;">
+                    <tr>
+                        <th class="bg-info">Catalogue No.</th>
+                        <th class="bg-info">Name</th>
+                        <th style="display: table-cell;" class="bg-info">Update</th>
+                        <th class="bg-info">Delete</th>
+                    </tr>
+                </thead>
+                <tbody style="display: table-row-group;">
+                    @foreach (var v in Model) { 
+                        <tr>
+                            <td>@v.Id</td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Catalog Name" id="@v.Id" value="@v.Name">
+                            </td>
+                            <td data-pg-collapsed="">
+                                <button type="button" class="btn btn-primary" onclick="updateCatalog(@v.Id);">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </button>
+                            </td>
+                            <td data-pg-collapsed="">
+                                <button type="button" class="btn btn-danger" onclick="deleteCatalog(@v.Id);">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

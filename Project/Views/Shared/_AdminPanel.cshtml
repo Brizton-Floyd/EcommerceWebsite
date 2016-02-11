@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Floyd's Printing and Engraving (FPE)</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/css/starter-template.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-pg-collapsed>
+        <div class="container">
+            <div class="navbar-header" data-pg-collapsed>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">WSC</a>
+            </div>
+            <div class="collapse navbar-collapse" data-pg-collapsed>
+                <ul class="nav navbar-nav">
+                    @{ 
+                        if ( ViewBag.visible == 1 ){ 
+                           @:<li class="dropdown active">
+                        }else {
+                           @:<li class="dropdown">
+                        }
+                    }
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Order <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/Admin/Index">Pending Orders</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/Admin/Orders">Orders</a>
+                            </li>
+                        </ul>
+                    </li>
+                    @{ 
+                        if ( ViewBag.visible == 2 ){ 
+                           @:<li class="active">
+                        } else {
+                            @:<li>
+                        }
+                    }
+                        <a href="/Admin/Catalog">Catalogue</a>
+                    </li>
+                    @{ 
+                        if ( ViewBag.visible == 3 ){ 
+                           @:<li class="active">
+                        } else {
+                            @:<li>
+                        }
+                    }
+                        <a href="/Admin/Users">User</a>
+                    </li>
+                    @{ 
+                        if ( ViewBag.visible == 4 ){ 
+                           @:<li class="active">
+                        } else {
+                            @:<li>
+                        }
+                    }
+                        <a href="/Admin/Setting">Setting</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/Login/Logout"><span class="glyphicon glyphicon-user"></span> Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+    <div class="container" data-pg-collapsed>
+        <div class="starter-template">
+            <h1>Floyd's Printing and Engraving (FPE)</h1>
+            <p class="lead">
+                Floyd's Printing and Engraving (FPE) is a small print and engraving organization.&nbsp;<br>
+            </p>
+        </div>
+    </div>
+    <div class="container" data-pg-collapsed>
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Hello, <strong>@Session["firstname"]</strong><br><small>You are Logged in as an Operation Manager.</small></h2>
+                <hr>
+            </div>
+        </div>
+    </div>
+        @RenderBody()
+    <!-- /.container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script>
+        function updateAdmin() {
+            var id = $('#updateUserId').val();
+            var firstname = $('#updateUserFirstName').val();
+            var lastname = $('#updateUserLastName').val();
+            var email = $('#updateUserEmail').val();
+            var password = $('#updateUserPassword').val();
+            var confirmpasword = $('#updateUserConfirmPassword').val();
+
+            if (password != confirmpasword) {
+                alert("Password Mismatch");
+            } else {
+                $.getJSON("/Login/UpdateUser?id=" + id + "&firstname=" + firstname + "&lastname=" + lastname + "&email=" + email + "&password=" + password, function (data) {
+                    if (data == "success") {
+                        window.location.href = "/Admin/Setting";
+                    } else {
+                        alert("Failed To Update");
+                    }
+                });
+            }
+        }
+
+        function updateCatalog(id) {
+            var name = $('#'+id).val();
+            $.getJSON("/Admin/UpdateCatalog?id=" + id + "&name=" + name, function (data) {
+                if (data == "success") {
+                    window.location.href = "/Admin/Catalog";
+                } else {
+                    alert("Failed To Update");
+                }
+            });
+        }
+
+        function deleteCatalog(id) {
+            $.getJSON("/Admin/DeleteCatalog?id=" + id , function (data) {
+                if (data == "success") {
+                    window.location.href = "/Admin/Catalog";
+                } else {
+                    alert("Failed To Delete");
+                }
+            });
+        }
+
+        function addCatalog() {
+            var name = $('#newCatalogName').val();
+            $.getJSON("/Admin/AddCatalog?name=" + name, function (data) {
+                if (data == "success") {
+                    window.location.href = "/Admin/Catalog";
+                } else {
+                    alert("Failed To Add");
+                }
+            });
+        }
+
+        function editUser(id) {
+            window.location.href = "/Admin/EditUser?id=" + id;
+        }
+
+        function deleteUser(id) {
+            $.getJSON("/Admin/DeleteUser?id=" + id, function (data) {
+                if (data == "success") {
+                    window.location.href = "/Admin/Users";
+                } else {
+                    alert("Failed To Delete");
+                }
+            });
+        }
+
+        function validateOrder(id) {
+            $.getJSON("/Admin/ValidateOrder?id=" + id, function (data) {
+                if (data == "success") {
+                    window.location.href = "/Admin/Index";
+                } else {
+                    alert("Failed To Delete");
+                }
+            });
+        }
+
+        function discardOrder(id) {
+            $.getJSON("/Admin/DiscardOrder?id=" + id, function (data) {
+                if (data == "success") {
+                    window.location.href = "/Admin/Index";
+                } else {
+                    alert("Failed To Delete");
+                }
+            });
+        }
+
+        function completeOrder(id) {
+            $.getJSON("/Admin/CompleteOrder?id=" + id, function (data) {
+                if (data == "success") {
+                    window.location.href = "/Admin/Orders";
+                } else {
+                    alert("Failed To Delete");
+                }
+            });
+        }
+    </script>
+    </body>
+</html>

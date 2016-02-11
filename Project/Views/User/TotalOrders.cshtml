@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "TotalOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" data-pg-collapsed>
+    <div class="table-responsive">
+        <h1>Current Orders</h1>
+        <br>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="bg-info">ID</th>
+                    <th class="bg-info">Job Type</th>
+                    <th class="bg-info">Media</th>
+                    <th class="bg-info">Catalogue Number</th>
+                    <th class="bg-info">Content</th>
+                    <th class="bg-info">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var v in Model)
+                {
+                    <tr>
+                        <td>@v.Id</td>
+                        <td>@v.JobType</td>
+                        <td>@v.Media</td>
+                        <td>@v.CatalogNumber</td>
+                        <td>@v.Content</td>
+                        <td>@v.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
