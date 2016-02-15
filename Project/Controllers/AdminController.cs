@@ -51,7 +51,7 @@ namespace Project.Controllers
             ViewBag.visible = 4;
             MyDatabaseEntities ctx = new MyDatabaseEntities();
             int userId = int.Parse(Session["id"].ToString());
-            User u = ctx.Users.FirstOrDefault(m => m.Id == userId);
+            User u = ctx.Users.FirstOrDefault(m => m.UserId == userId);
             return View(u);
         }
 
@@ -64,7 +64,7 @@ namespace Project.Controllers
 
             ViewBag.visible = 3;
             MyDatabaseEntities ctx = new MyDatabaseEntities();
-            List<User> list = ctx.Users.Where(x => x.Id != 1).ToList();
+            List<User> list = ctx.Users.Where(x => x.UserId != 2).ToList();
             return View(list);
         }
 
@@ -84,7 +84,7 @@ namespace Project.Controllers
         public JsonResult UpdateCatalog(int id, string name)
         {
             MyDatabaseEntities ctx = new MyDatabaseEntities();
-            Catalog u = ctx.Catalogs.FirstOrDefault(x => x.Id == id);
+            Catalog u = ctx.Catalogs.FirstOrDefault(x => x.CatalogId == id);
 
             string response = "failed";
             if (u != null)
@@ -99,7 +99,7 @@ namespace Project.Controllers
         public JsonResult DeleteCatalog(int id)
         {
             MyDatabaseEntities ctx = new MyDatabaseEntities();
-            Catalog u = ctx.Catalogs.FirstOrDefault(x => x.Id == id);
+            Catalog u = ctx.Catalogs.FirstOrDefault(x => x.CatalogId == id);
 
             string response = "failed";
             if (u != null )
@@ -125,7 +125,7 @@ namespace Project.Controllers
         public ActionResult EditUser(int id)
         {
             MyDatabaseEntities ctx = new MyDatabaseEntities();
-            User u = ctx.Users.FirstOrDefault(x => x.Id == id);
+            User u = ctx.Users.FirstOrDefault(x => x.UserId == id);
 
             return View(u);
         }
@@ -133,7 +133,7 @@ namespace Project.Controllers
         public JsonResult DeleteUser(int id)
         {
             MyDatabaseEntities ctx = new MyDatabaseEntities();
-            User u = ctx.Users.FirstOrDefault(x => x.Id == id);
+            User u = ctx.Users.FirstOrDefault(x => x.UserId == id);
 
             string response = "failed";
             if (u != null)
@@ -148,7 +148,7 @@ namespace Project.Controllers
         public JsonResult ValidateOrder(int id)
         {
             MyDatabaseEntities ctx = new MyDatabaseEntities();
-            Order u = ctx.Orders.FirstOrDefault(x => x.Id == id);
+            Order u = ctx.Orders.FirstOrDefault(x => x.OrderId == id);
 
             string response = "failed";
             if (u != null)
@@ -163,7 +163,7 @@ namespace Project.Controllers
         public JsonResult DiscardOrder(int id)
         {
             MyDatabaseEntities ctx = new MyDatabaseEntities();
-            Order u = ctx.Orders.FirstOrDefault(x => x.Id == id);
+            Order u = ctx.Orders.FirstOrDefault(x => x.OrderId == id);
 
             string response = "failed";
             if (u != null)
@@ -178,7 +178,7 @@ namespace Project.Controllers
         public JsonResult CompleteOrder(int id)
         {
             MyDatabaseEntities ctx = new MyDatabaseEntities();
-            Order u = ctx.Orders.FirstOrDefault(x => x.Id == id);
+            Order u = ctx.Orders.FirstOrDefault(x => x.OrderId == id);
 
             string response = "failed";
             if (u != null)

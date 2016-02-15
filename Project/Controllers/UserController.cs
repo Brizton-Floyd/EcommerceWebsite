@@ -34,7 +34,7 @@ namespace Project.Controllers
             ViewBag.visible = 3;
             MyDatabaseEntities ctx = new MyDatabaseEntities();
             int userId = int.Parse(Session["id"].ToString());
-            User u = ctx.Users.FirstOrDefault(m => m.Id == userId);
+            User u = ctx.Users.FirstOrDefault(m => m.UserId == userId);
             return View(u);
         }
 

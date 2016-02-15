@@ -1,32 +1,11 @@
-﻿@{
-    Layout = null;
-}
+﻿@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
+}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Floyd's Printing and Engraving (FPE)</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/starter-template.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-</head>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-pg-collapsed>
     <div class="container">
         <div class="navbar-header">
@@ -39,8 +18,7 @@
             <a class="navbar-brand" href="#">FPE</a>
         </div>
         <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-            </ul>
+            <ul class="nav navbar-nav"></ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#"><span class="glyphicon glyphicon-user"></span> Login</a>
@@ -50,18 +28,15 @@
         <!--/.nav-collapse -->
     </div>
 </div>
-<div class="container" data-pg-collapsed>
-    <div class="starter-template">
-        <h1>Floyd's Printing and Engraving (FPE)</h1>
-        <p class="lead">Floyd's Printing and Engraving (FPE) is a small print and engraving organization.&nbsp;<br></p>
-    </div>
-</div>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-4" data-pg-collapsed>
-            <center>
-                <h2>Login</h2>
-            </center>
+            
+                <center>
+                    <h2>Login</h2>
+                </center>
+            
             <form role="form" class="form-horizontal" data-pg-collapsed>
                 <div class="form-group">
                     <label class="control-label col-sm-1" for="loginEmail">Email</label>
@@ -86,10 +61,12 @@
             <h1 style="text-align:center; margin-top: 120px;">OR</h1>
         </div>
         <div class="col-sm-6">
-            <center>
-                <h2>Signup</h2>
-            </center>
-            <form role="form" class="form-horizontal" >
+           
+                <center>
+                    <h2>Sign up</h2>
+                </center>
+           
+            <form role="form" class="form-horizontal">
                 <div class="form-group" data-pg-collapsed>
                     <label class="control-label   col-sm-4" for="userFirstName">First Name</label>
                     <div class="col-sm-7">
@@ -123,7 +100,7 @@
                 <div class="form-group">
                     <div class="col-sm-11">
                         <center>
-                            <button type="button" class="btn btn-lg btn-primary btn-block" onclick="signup();">Singup</button>
+                            <button type="button" class="btn btn-lg btn-primary btn-block" onclick="signup();">Sign Up</button>
                         </center>
                     </div>
                 </div>
@@ -137,46 +114,46 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="Scripts/jquery.min.js"></script>
 <script src="Scripts/bootstrap.min.js"></script>
-    <script>
-        function login() {
+<script>
+    function login() {
 
-            var email = $('#loginEmail').val();
-            var password = $('#loginPassword').val();
+        var email = $('#loginEmail').val();
+        var password = $('#loginPassword').val();
 
-            $.getJSON("/Login/Validate?email=" + email + "&password=" + password, function (data) {
-                if (data == "admin") {
-                    //alert("Admin Login");
-                    window.location.href = "/Admin/Index";
-                } else if (data == "user") {
-                    //alert("User Login");
+        $.getJSON("/Login/Validate?email=" + email + "&password=" + password, function (data) {
+            if (data == "admin") {
+                //alert("Admin Login");
+                window.location.href = "/Admin/Index";
+            } else if (data == "user") {
+                //alert("User Login");
+                window.location.href = "/User/Index";
+            } else {
+                alert("Invalid Login");
+            }
+        });
+    }
+
+    // Valid signup
+    function signup() {
+        var firstname = $('#userFirstName').val();
+        var lastname = $('#userLastName').val();
+        var email = $('#userEmail').val();
+        var password = $('#userPassword').val();
+        var confirmPassword = $('#userConfirmPassword').val();
+
+        if (password != confirmPassword) {
+            alert("Password not matched");
+        } else {
+            $.getJSON("/Login/SingupValidate?firstname=" + firstname + "&lastname=" + lastname + "&email=" + email + "&password=" + password, function (data) {
+                if (data == "success") {
+                    //alert("Signup successfully");
                     window.location.href = "/User/Index";
                 } else {
-                    alert("Invalid Login");
+                    alert("invalid Attempt");
+                    //$('#signUPresponse').html("<span style='color:red;'>Failed To Signup</span>");
                 }
             });
         }
-        
-        // Valid signup
-        function signup() {
-            var firstname = $('#userFirstName').val();
-            var lastname = $('#userLastName').val();
-            var email = $('#userEmail').val();
-            var password = $('#userPassword').val();
-            var confirmPassword = $('#userConfirmPassword').val();
-
-            if (password != confirmPassword) {
-                alert("Password not matched");
-            } else {
-                $.getJSON("/Login/SingupValidate?firstname=" + firstname + "&lastname=" + lastname+ "&email=" + email + "&password=" + password, function (data) {
-                    if (data == "success") {
-                        //alert("Signup successfully");
-                        window.location.href = "/User/Index";
-                    } else {
-                        alert("invalid Attempt");
-                        //$('#signUPresponse').html("<span style='color:red;'>Failed To Signup</span>");
-                    }
-                });
-            }
-        }
-    </script>
+    }
+</script>
 </body>

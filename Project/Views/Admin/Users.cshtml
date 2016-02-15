@@ -23,18 +23,18 @@
                     @foreach (var v in Model)
                     {
                         <tr style="display: table-row;">
-                            <td>@v.Id</td>
+                            <td>@v.UserId</td>
                             <td>@v.FirstName</td>
                             <td>@v.LastName</td>
                             <td>@v.Email</td>
                             <td>@v.Password</td>
                             <td data-pg-collapsed>
-                                <button type="button" class="btn btn-primary" onclick="editUser(@v.Id);">
+                                <button type="button" class="btn btn-primary" onclick="editUser(@v.UserId);">
                                     <span class="glyphicon glyphicon-thumbs-up"></span>
                                 </button>
                             </td>
                             <td data-pg-collapsed>
-                                <button type="button" class="btn btn-danger" onclick="deleteUser(@v.Id);">
+                                <button type="button" class="btn btn-danger" onclick="deleteUser(@v.UserId);">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
                             </td>

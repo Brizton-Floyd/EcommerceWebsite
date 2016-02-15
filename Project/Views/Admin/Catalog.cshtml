@@ -30,17 +30,17 @@
                 <tbody style="display: table-row-group;">
                     @foreach (var v in Model) { 
                         <tr>
-                            <td>@v.Id</td>
+                            <td>@v.CatalogId</td>
                             <td>
-                                <input type="text" class="form-control" placeholder="Catalog Name" id="@v.Id" value="@v.Name">
+                                <input type="text" class="form-control" placeholder="Catalog Name" id="@v.CatalogId" value="@v.Name">
                             </td>
                             <td data-pg-collapsed="">
-                                <button type="button" class="btn btn-primary" onclick="updateCatalog(@v.Id);">
+                                <button type="button" class="btn btn-primary" onclick="updateCatalog(@v.CatalogId);">
                                     <span class="glyphicon glyphicon-thumbs-up"></span>
                                 </button>
                             </td>
                             <td data-pg-collapsed="">
-                                <button type="button" class="btn btn-danger" onclick="deleteCatalog(@v.Id);">
+                                <button type="button" class="btn btn-danger" onclick="deleteCatalog(@v.CatalogId);">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
                             </td>

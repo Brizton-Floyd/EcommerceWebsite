@@ -5,9 +5,10 @@ using System.Web;
 
 namespace Project.Models
 {
-    public class Catalog
+    public class Payment
     {
-        public int CatalogId { get; set; }
-        public string Name { get; set; }
+        public int PaymentId { get; set; }
+        public string PayMethod { get; set; }
+
     }
 }

@@ -14,6 +14,7 @@
                     <th class="bg-info">Media</th>
                     <th class="bg-info">Catalogue Number</th>
                     <th class="bg-info">Content</th>
+                    <th class="bg-info">Pay Method</th>
                     <th class="bg-info">Status</th>
                 </tr>
             </thead>
@@ -21,11 +22,12 @@
                 @foreach (var v in Model)
                 {
                     <tr>
-                        <td>@v.Id</td>
+                        <td>@v.OrderId</td>
                         <td>@v.JobType</td>
                         <td>@v.Media</td>
                         <td>@v.CatalogNumber</td>
                         <td>@v.Content</td>
+                        <td>@v.PaymentMethod</td>
                         <td>@v.Status</td>
                     </tr>
                 }

@@ -37,43 +37,43 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li @{ if ( ViewBag.visible == 1) {
-                                @:class="active"          
-                              } 
-                        }>
+                    <li @{ if (ViewBag.visible == 1) {
+                                @: class="active"
+                    }}>
                         <a href="/User/Index">Order</a>
                     </li>
                     <li@{ if ( ViewBag.visible == 2) {
-                                @:class="active"          
-                              } 
-                        }>
-                         @{
-                            if (Session["id"] != null) {
-                                @:<a href="/User/TotalOrders">My Orders</a>
-                            }                                
-                        }
-                    </li>
-                    <li@{ if ( ViewBag.visible == 3) {
-                                @:class="active"          
-                              } 
-                        }>
+                                @:class ="active"
+                                                                                                              } }>
                         @{
-                            if (Session["id"] != null) {
-                                @:<a href="/User/Setting">Setting</a>
-                            }                                
+                            if (Session["id"] != null)
+                            {
+                                @:<a href="/User/TotalOrders">My Orders</a>
+                            }
                         }
-                        
-                    </li>
+                        </li>
+                        <li@{ if ( ViewBag.visible == 3) {
+                                @:class ="active"
+                                                                                                              } }>
+                            @{
+                                if (Session["id"] != null)
+                                {
+                                    @:<a href="/User/Setting">Setting</a>
+                            }
+                            }
+
+                            </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         @{
-                            if (Session["id"] != null) {
+                            if (Session["id"] != null)
+                            {
                                 @:<a href="/Login/Logout"><span class="glyphicon glyphicon-user"></span><label> &nbsp;Logout</label></a>
                             }
                             else {
                                 @:<a href="/Login"><span class="glyphicon glyphicon-user"></span><label> &nbsp;Login</label></a>
-                            }                                   
+                            }
                         }
                     </li>
                 </ul>
@@ -81,27 +81,29 @@
             <!--/.nav-collapse -->
         </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="starter-template">
-            <h1>Floyd's Printing and Engraving (FPE)</h1>
-            <p class="lead">Floyd's Printing and Engraving (FPE) is a small print and engraving organization.&nbsp;<br></p>
+            <div class="jumbotron">
+                <h1>Floyd's Printing and Engraving (FPE)</h1>
+                <p class="lead">Floyd's Printing and Engraving (FPE) is a small print and engraving organization.&nbsp;<br></p>
+            </div>
         </div>
     </div>
     @{
-        if ( Session["id"] != null)
+        if (Session["id"] != null)
         {
             <div class="container" data-pg-collapsed>
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2>Hello, <strong>@Session["firstname"]</strong></h2>
+                        <h2>Hello, <strong>@Session["firstname"]  @Session["lastname"]</strong></h2>
                         <hr>
                     </div>
                 </div>
             </div>
-            
+
         }
     }
-    
+
 
     <!-- Rending Changed Portion Here -->
     @RenderBody()
@@ -136,18 +138,29 @@
                 });
             }
         }
-        function AddOrder() {
+        function ProcessOrder() {
             var jobType = $('#typeOfJob').val();
             var media = $('#media').val();
             var mediaCatalog = $('#mediaCatalogueNumber').val();
             var content = $('#content').val();
 
-            $.getJSON("/User/AddOrder?job=" + jobType + "&media=" + media + "&mediaCatalog=" + mediaCatalog + "&content=" + content, function (data) {
-                if (data == "success") {
-                    window.location.href = "/User/Index";
-                    alert("Order added successfully, Click My Orders above");
+            $.getJSON("/ProcessOrder/ProcessRequest?job=" + jobType + "&media=" + media + "&mediaCatalog=" + mediaCatalog + "&content=" + content, function (data) {
+                if (data == "pass") {
+                    window.location.href = "/ProcessOrder/PaymentOption";
                 } else {
-                    alert("Failed To Update");
+                    alert("All fields must have a value");
+                }
+            });
+        }
+        function AddOrder() {
+            var payment = $('#typeOfPayment').val();
+
+            $.getJSON("/ProcessOrder/AddOrder?payOption=" + payment, function (data) {
+                if (data == "pass") {
+                    alert("Your order was processed view orders above")
+                    window.location.href = "/User/Index";
+                } else {
+                    alert("All fields must have a value");
                 }
             });
         }

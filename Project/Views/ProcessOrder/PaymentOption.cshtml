@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "PaymentOption";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <form role="form" class="form-horizontal">
+        <!-- Form Name -->
+        <center>
+            <h2><strong>Select Payment Option</strong></h2>
+            <br>
+        </center>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="typeOfJob">Payment</label>
+            <div class="col-sm-5">
+                <select id="typeOfPayment" class="form-control">
+                    <option>PayPal</option>
+                    <option>Credit Card</option>
+                    <option>Pay on Delivery</option>
+                </select>
+            </div>
+        </div>
+        <center>
+            <button type="button" class="btn btn-primary btn-lg" onclick="AddOrder();">Process Order</button>
+        </center>
+         <br>
+    </form>
+</div>

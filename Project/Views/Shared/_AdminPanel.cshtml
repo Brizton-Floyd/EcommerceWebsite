@@ -103,7 +103,7 @@
     <div class="container" data-pg-collapsed>
         <div class="row">
             <div class="col-sm-12">
-                <h2>Hello, <strong>@Session["firstname"]</strong><br><small>You are Logged in as an Operation Manager.</small></h2>
+                <h2>Hello, <strong>@Session["firstname"] @Session["lastname"] </strong><br><small>You are Logged in as an Operation Manager.</small></h2>
                 <hr>
             </div>
         </div>
@@ -152,7 +152,9 @@
             $.getJSON("/Admin/DeleteCatalog?id=" + id , function (data) {
                 if (data == "success") {
                     window.location.href = "/Admin/Catalog";
-                } else {
+                }
+                else
+                {
                     alert("Failed To Delete");
                 }
             });

@@ -25,19 +25,19 @@
                     @foreach (var v in Model)
                     {
                         <tr>
-                            <td>@v.Id</td>
+                            <td>@v.OrderId</td>
                             <td>@v.UserId</td>
                             <td>@v.JobType</td>
                             <td>@v.Media</td>
                             <td>@v.CatalogNumber</td>
                             <td>@v.Content</td>
                             <td data-pg-collapsed>
-                                <button type="button" class="btn btn-primary" onclick="validateOrder(@v.Id);">
+                                <button type="button" class="btn btn-primary" onclick="validateOrder(@v.OrderId);">
                                     <span class="glyphicon glyphicon-thumbs-up"></span>
                                 </button>
                             </td>
                             <td data-pg-collapsed>
-                                <button type="button" class="btn btn-danger" onclick="discardOrder(@v.Id);">
+                                <button type="button" class="btn btn-danger" onclick="discardOrder(@v.OrderId);">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
                             </td>
