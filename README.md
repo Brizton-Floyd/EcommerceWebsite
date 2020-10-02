@@ -1,2 +1,2 @@
 # EcommerceWebsite
-This is a Website
+This is an Ecommerce Website
